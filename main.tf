@@ -7,17 +7,8 @@ locals {
 
 resource null_resource print_names {
   provisioner "local-exec" {
-    command = "echo 'Resource group: ${var.resource_group_name}'"
-  }
-  provisioner "local-exec" {
     command = "echo 'VPC name: ${var.vpc_name}'"
   }
-}
-
-data ibm_resource_group resource_group {
-  depends_on = [null_resource.print_names]
-
-  name = var.resource_group_name
 }
 
 data ibm_is_vpc vpc {
@@ -32,7 +23,7 @@ resource ibm_is_public_gateway vpc_gateway {
   name           = "${var.vpc_name}-gw-${local.vpc_zone_names[count.index]}"
   vpc            = data.ibm_is_vpc.vpc.id
   zone           = local.vpc_zone_names[count.index]
-  resource_group = data.ibm_resource_group.resource_group.id
+  resource_group = var.resource_group_id
 
   //User can configure timeouts
   timeouts {
