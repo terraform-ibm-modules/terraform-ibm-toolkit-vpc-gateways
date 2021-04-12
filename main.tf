@@ -28,6 +28,6 @@ resource ibm_is_public_gateway vpc_gateway {
   //User can configure timeouts
   timeouts {
     create  = "15m"
-    destroy = "15m"
+    delete = "15m"
   }
 }
