@@ -1,7 +1,7 @@
 
 locals {
   zone_count     = 3
-  vpc_zone_names = [ for index in range(var.subnet_count): "${var.region}-${(index % local.zone_count) + 1}" ]
+  vpc_zone_names = [ for index in range(local.zone_count): "${var.region}-${(index % local.zone_count) + 1}" ]
   gateway_count  = local.zone_count
   gateway_ids    = data.ibm_is_public_gateway.vpc_gateway[*].id
 }
