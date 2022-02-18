@@ -37,6 +37,56 @@ versions:
         scope: global
         type: string
         description: The IBM Cloud region where the cluster will be/has been installed.
+      - name: provision
+        type: bool
+        description: Flag indicating that the gateway must be provisioned
+        default: true
+        optional: true
+      - name: enabled
+        type: bool
+        description: Flag to indicate that IBM VPC module should be enabled
+        default: true
+        optional: true
+    version: v1.7.0
+    outputs:
+      - name: count
+        description: The number of gateways created
+      - name: gateway_ids
+        description: List of ids of the gateways created
+      - name: gateways
+        description: List of ids and zones of gateways created
+      - name: enabled
+        description: output "enabled" {   value = var.enabled }
+  - platforms: []
+    providers:
+      - name: ibm
+        source: "ibm-cloud/ibm"
+    dependencies:
+      - id: resource-group
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-resource-group
+            version: ">= 1.0.0"
+      - id: vpc
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-vpc
+            version: ">= 1.0.0"
+    variables:
+      - name: resource_group_id
+        moduleRef:
+          id: resource-group
+          output: id
+        type: string
+        description: The id of the IBM Cloud resource group where the VPC gateways will be created.
+      - name: vpc_name
+        moduleRef:
+          id: vpc
+          output: name
+        type: string
+        description: The name of the vpc instance
+      - name: region
+        scope: global
+        type: string
+        description: The IBM Cloud region where the cluster will be/has been installed.
       - name: subnet_count
         scope: ignore
         type: number
