@@ -1,4 +1,4 @@
-id: github.com/cloud-native-toolkit/terraform-ibm-vpc-gateways
+id: github.com/terraform-ibm-modules/terraform-ibm-toolkit-vpc-gateways
 name: ibm-vpc-gateways
 type: terraform
 description: Terraform module to provision public gateways for an existing VPC instance
@@ -7,6 +7,54 @@ tags:
   - vpc
   - public gateway
 versions:
+  - platforms: []
+    providers:
+      - name: ibm
+        source: ibm-cloud/ibm
+    dependencies:
+      - id: resource-group
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-resource-group
+            version: '>= 1.0.0'
+      - id: vpc
+        refs:
+          - source: github.com/cloud-native-toolkit/terraform-ibm-vpc
+            version: '>= 1.0.0'
+    variables:
+      - name: resource_group_id
+        type: string
+        description: >-
+          The id of the IBM Cloud resource group where the VPC gateways will be
+          created.
+        moduleRef:
+          id: resource-group
+          output: id
+      - name: region
+        type: string
+        description: The IBM Cloud region where the cluster will be/has been installed.
+        scope: global
+      - name: vpc_name
+        type: string
+        description: The name of the vpc instance
+        moduleRef:
+          id: vpc
+          output: name
+      - name: provision
+        type: bool
+        description: Flag indicating that the gateway must be provisioned
+        default: true
+      - name: tags
+        type: list(string)
+        default: []
+        description: Tags that should be added to the instance
+    version: v1.9.1
+    outputs:
+      - name: count
+        description: The number of gateways created
+      - name: gateway_ids
+        description: List of ids of the gateways created
+      - name: gateways
+        description: List of ids and zones of gateways created
   - platforms: []
     providers:
       - name: ibm
