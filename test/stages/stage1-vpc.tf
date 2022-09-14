@@ -1,5 +1,5 @@
 module "vpc" {
-  source = "github.com/cloud-native-toolkit/terraform-ibm-vpc.git"
+  source = "github.com/terraform-ibm-modules/terraform-ibm-toolkit-vpc.git"
 
   resource_group_name = module.resource_group.name
   region              = var.region
