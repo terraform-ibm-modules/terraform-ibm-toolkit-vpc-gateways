@@ -26,3 +26,7 @@ variable "vpc_subnet_count" {
   description = "Flag indicating that this is a vpc cluster"
   default     = 3
 }
+
+variable "common_tags" {
+  default = ["common1", "test"]
+}

@@ -5,6 +5,7 @@ locals {
   vpc_id         = data.ibm_is_vpc.vpc.id
   gateway_count  = local.zone_count
   gateway_ids    = data.ibm_is_public_gateway.vpc_gateway[*].id
+  tags              = distinct(concat(var.common_tags, var.tags))
 }
 
 resource null_resource print_names {
@@ -26,7 +27,7 @@ resource ibm_is_public_gateway vpc_gateway {
   vpc            = local.vpc_id
   zone           = local.vpc_zone_names[count.index]
   resource_group = var.resource_group_id
-  tags           = var.tags
+  tags           = local.tags
 
   //User can configure timeouts
   timeouts {

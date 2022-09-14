@@ -14,11 +14,11 @@ versions:
   dependencies:
     - id: resource-group
       refs:
-        - source: github.com/cloud-native-toolkit/terraform-ibm-resource-group
+        - source: github.com/terraform-ibm-modules/terraform-ibm-toolkit-resource-group
           version: ">= 1.0.0"
     - id: vpc
       refs:
-        - source: github.com/cloud-native-toolkit/terraform-ibm-vpc
+        - source: github.com/terraform-ibm-modules/terraform-ibm-toolkit-vpc
           version: ">= 1.0.0"
   variables:
     - name: resource_group_id
@@ -31,3 +31,6 @@ versions:
         output: name
     - name: region
       scope: global
+    - name: common_tags
+      scope: global
+      important: true
