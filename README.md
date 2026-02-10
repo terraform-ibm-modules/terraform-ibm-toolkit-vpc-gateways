@@ -1,5 +1,7 @@
 # IBM Cloud VPC Public Gateway
 
+:warning: This module is no longer maintained. Please use [terraform-ibm-landing-zone-vpc](https://github.com/terraform-ibm-modules/terraform-ibm-landing-zone-vpc) for configuring IBM Cloud Virtual Private Cloud (VPC) resources.
+
 Terraform module to provision public gateways for an existing VPC instance. Public gateways are restricted to having a single gateway per zone, which means no more than three gateways can be created. This module will always create one gateway in each zone (three gateways total).
 
 ## Software dependencies
